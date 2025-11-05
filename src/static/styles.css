@@ -142,3 +142,106 @@ footer {
   padding: 20px;
   color: #666;
 }
+
+/* Добавлено: стиль секции участников внутри карточки активности */
+.activity-card .participants {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #e6e6e6;
+}
+
+.activity-card .participants h5 {
+  margin: 0 0 10px 0;
+  font-size: 13px;
+  color: #1a237e;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+/* Список участников: убираем стандартные маркеры, делаем аккуратные элементы */
+.activity-card .participants ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Каждый участник — гибкий ряд с аватаркой/бейджем и именем */
+.activity-card .participants li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(26,35,126,0.03), rgba(0,0,0,0));
+  transition: background-color 0.12s, transform 0.08s;
+}
+
+.activity-card .participants li:hover {
+  background-color: rgba(25,118,210,0.06);
+  transform: translateY(-1px);
+}
+
+/* Круглая аватарка или бейдж с инициалами */
+.activity-card .participant-avatar {
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: #e8eaf6;
+  color: #1a237e;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  border: 1px solid rgba(26,35,126,0.06);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.02) inset;
+}
+
+/* Имя и дополнительная информация */
+.activity-card .participant-name {
+  font-size: 14px;
+  color: #222;
+  font-weight: 500;
+}
+
+/* Кнопка удаления участника */
+.activity-card .participant-delete {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: #c62828;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+
+.activity-card .participant-delete:hover {
+  background: rgba(198,40,40,0.08);
+}
+
+/* Пустой список участников */
+.activity-card .participants .empty {
+  font-size: 13px;
+  color: #666;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: #fff;
+  border: 1px dashed #eee;
+}
+
+/* Адаптивность: при узкой ширине показываем аватарки меньше */
+@media (max-width: 420px) {
+  .activity-card .participant-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+  .activity-card .participant-name {
+    font-size: 13px;
+  }
+}
