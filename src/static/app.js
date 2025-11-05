@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
       // Clear loading message
       activitiesList.innerHTML = "";
 
+      // clear activity select to avoid duplicates
+      activitySelect.innerHTML = '<option value="">Select an activity</option>';
+
       // Populate activities list
       Object.entries(activities).forEach(([name, details]) => {
         const activityCard = document.createElement("div");
@@ -20,11 +23,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const spotsLeft = details.max_participants - details.participants.length;
 
+        // build participants HTML: initials avatar + name, or empty state
+        const participantsHTML =
+          details.participants && details.participants.length
+            ? `<div class="participants">
+                 <h5>Participants</h5>
+                 <ul>
+                   ${details.participants
+                     .map((p) => {
+                       const initials = (p
+                         .split(" ")
+                         .map((n) => n[0] || "")
+                         .join("")
+                         .slice(0, 2) || p.slice(0, 2))
+                         .toUpperCase();
+                       return `<li>
+                                 <span class="participant-avatar">${initials}</span>
+                                 <span class="participant-name">${p}</span>
+                               </li>`;
+                     })
+                     .join("")}
+                 </ul>
+               </div>`
+            : `<div class="participants">
+                 <h5>Participants</h5>
+                 <div class="empty">No participants yet</div>
+               </div>`;
+
         activityCard.innerHTML = `
           <h4>${name}</h4>
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          ${participantsHTML}
         `;
 
         activitiesList.appendChild(activityCard);
